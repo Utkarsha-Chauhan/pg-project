@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
     <Header/>
-    <Container className="home">
+    <Container id="home" className="home">
 
       <Row>
         <Col className="col1">
