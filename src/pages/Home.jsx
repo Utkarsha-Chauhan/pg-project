@@ -5,10 +5,13 @@ import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
 import "../styles/Home.css";
 import home_img from "../assets/home img.jpeg";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <>
+    <Header/>
     <Container className="home">
 
       <Row>
@@ -33,7 +36,7 @@ const Home = () => {
       </Row>
     </Container>
 
-    <Container className="about">
+    <Container id="about" className="about">
         <Row className="row1">
             <Col>
                 <h1>About Us</h1>
@@ -73,7 +76,7 @@ const Home = () => {
     </Container>
 
     {/* contact us form */}
-    <Container className="contact">
+    <Container id="contact" className="contact">
         <Row className="row1">
             <Col>
                 <h1>Contact Us</h1>
@@ -91,6 +94,7 @@ const Home = () => {
             </Col>
         </Row>
     </Container>
+    <Footer/>
     </>
   );
 };

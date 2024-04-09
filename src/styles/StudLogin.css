@@ -1,0 +1,72 @@
+@import url("./theme.css");
+
+.studlogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    flex-direction: column;
+}
+
+.studlogin .row{
+    min-width: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.studlogin .row h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+ .msg{
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 400px;
+    text-align: center;
+} 
+
+
+.msg a{
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold; 
+}
+
+.msg a:hover{
+    color: var(--secondary-color);
+    text-decoration: underline;
+
+}
+
+/* .studlogin .row {
+    border: 1px solid var(--primary-color);
+} */
+
+/* mediaquires */
+
+@media screen and (max-width: 768px){
+    .studlogin .row{
+        min-width: 100%;
+    }
+}
+
+.btnLogin{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.btnLogin:hover{
+    background-color: var(--secondary-color) !important;
+    color: var(--on-secondary-color) !important;
+}

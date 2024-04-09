@@ -1,16 +1,24 @@
-import React from 'react'
-import Header from './components/Header'
-import Home from './pages/Home'
-import Footer from './components/Footer'
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import StudentLogin from "./pages/StudLogin"
+import StudentSignUp from "./pages/StudSignUp"
 const App = () => {
   return (
-   <>
-    <Header/>
-    <Home/>
-    <Footer/>
-   </>
-  )
-}
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/student-login" element={<StudentLogin />} />
+          <Route path="/student-signup" element={<StudentSignUp />} />
 
-export default App
+
+          {/* Add more routes here */}
+        </Routes>
+        
+      </div>
+    </Router>
+  );
+};
+
+export default App;

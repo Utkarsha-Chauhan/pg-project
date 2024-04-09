@@ -67,7 +67,7 @@
     color: var(--on-secondary-color) !important;
 }
 
-.btn{
+.loginBtn{
     background-color: var(--button-secondary-bg) !important;
     color: var(--button-secondary-text) !important;
     font-weight: bold;
@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 
-.btn:hover{
+.loginBtn:hover{
     background-color: var(--button-secondary-text) !important;
     color: var(--button-secondary-bg) !important;
 
@@ -96,3 +96,25 @@
     background-color: var(--on-primary-color) !important;
 }
 
+.modal-content{
+    overflow: hidden;
+}
+
+.modal-body{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    display: flex;  
+    justify-content: space-around;
+}
+
+.modal-body a{
+    /* color: var(--on-primary-color) !important; */
+    background-color: var(--button-secondary-bg) !important;
+    color: var(--button-secondary-text) !important;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    padding-left: 10px;
+
+}
