@@ -1,0 +1,20 @@
+:root {
+    /* Primary color */
+    --primary-color: #5555FF;
+    --on-primary-color: #FFFFFF; /* Text color on primary background */
+  
+    /* Secondary color */
+    --secondary-color: #FF7F50; /* Coral (orange) as a contrasting secondary color */
+    --on-secondary-color: #FFFFFF; /* Text color on secondary background */
+  
+    /* Tertiary color */
+    --tertiary-color: #32CD32; /* Lime green as a vibrant tertiary color */
+    --on-tertiary-color: #000000; /* Text color on tertiary background */
+  
+    /* Button colors */
+    --button-primary-bg: var(--primary-color); /* Primary color for button background */
+    --button-primary-text: var(--on-primary-color); /* Text color on primary button */
+  
+    --button-secondary-bg: var(--secondary-color); /* Secondary color for button background */
+    --button-secondary-text: var(--on-secondary-color); /* Text color on secondary button */
+  }

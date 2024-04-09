@@ -1,0 +1,268 @@
+@import url("./theme.css");
+
+.home{
+    /* background-color: red; */
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    padding: 10px;
+    text-align: center;
+    min-height: 90vh;
+    margin: 10px auto;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    /* width: 100vw !important; */
+}
+
+.home .row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    min-height: 90vh;
+}
+
+.home .row .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+.home .row .col1{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.home .row .col h1{
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+.home .row .col h1 span{
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.home .row .col p{
+    color: var(--text-color);
+    font-size: 1.5rem;
+    text-align: justify;
+}
+
+.home .row .col .btn{
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid var(--button-secondary-bg);
+}
+
+.home .row .col .btn:hover{
+    background-color: var(--button-secondary-text);
+    border: 1px solid var(--button-secondary-bg);
+    color: var(--button-secondary-bg);
+}
+
+.home .row .col img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* mediaquires */
+
+@media screen and (max-width: 768px){
+    .home .row{
+        flex-direction: column-reverse;
+        margin: -15px;
+        /* padding: 20px 0; */
+    }
+    .home .row .col{
+        margin: 10px 0px;
+    }
+    .home .row .col1{
+        margin: 10px 0px;
+    }
+}
+
+.about{
+    /* background-color: red; */
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    padding: 10px;
+    text-align: center;
+    min-height: 90vh;
+    margin: 10px auto;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    /* width: 100vw !important; */
+}
+
+.about .row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    min-height: 200px;
+    /* border: 1px solid var(--primary-color); */
+}
+
+.about .row .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.about .row .col h1{
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.about .row2 .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 0.5px solid var(--primary-color);
+    height: 200px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+} 
+
+
+.about .row2 .col h2{
+    color: var(--on-primary-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.about .row2 .col p{
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+}
+
+
+.contact{
+    /* background-color: red; */
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    padding: 10px;
+    text-align: center;
+    min-height: 90vh;
+    margin: 10px auto;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    /* width: 100vw !important; */
+}
+
+.contact .row1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    min-height: 200px;
+    /* border: 1px solid var(--primary-color); */
+}
+
+.contact .row1 .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.contact .row1 .col h1{
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.contact .row2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    min-height: 200px;
+    /* border: 1px solid var(--primary-color); */
+}
+
+.contact .row2 .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 0.5px solid var(--primary-color);
+    min-height: 200px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.contact .row2 .col form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+}
+
+.contact .row2 .col form input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+}
+
+.contact .row2 .col form textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+}
+
+.contact .row2 .col form button{
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid var(--button-secondary-bg);
+}
+
+.contact .row2 .col form button:hover{
+    background-color: var(--button-secondary-text);
+    border: 1px solid var(--button-secondary-bg);
+    color: var(--button-secondary-bg);
+}

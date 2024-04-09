@@ -1,0 +1,94 @@
+@import url("./theme.css");
+
+.navbar{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--on-primary-color);
+    border-bottom-right-radius: 20px ;
+    border-bottom-left-radius: 20px ; 
+}
+
+.navbar-brand{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--on-primary-color) !important;
+}
+
+.navbar-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link{
+    color: var(--on-primary-color) !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+.nav-link:hover{
+    color: var(--secondary-color) !important;
+}
+
+.dropdown-toggle{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    margin-bottom: 2px;
+}
+
+.dropdown-menu{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    margin-bottom: 20px;
+}
+
+.dropdown-item{
+    color: var(--on-primary-color) !important;
+}
+
+.dropdown-item:hover{
+    background-color: var(--secondary-color) !important;
+    color: var(--on-secondary-color) !important;
+}
+
+.btn{
+    background-color: var(--button-secondary-bg) !important;
+    color: var(--button-secondary-text) !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: var(--button-secondary-text) !important;
+    color: var(--button-secondary-bg) !important;
+
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.navbar-toggler{
+    background-color: var(--on-primary-color) !important;
+}
+
+.navbar-toggler-icon{
+    background-color: var(--on-primary-color) !important;
+}
+
