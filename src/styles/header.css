@@ -25,6 +25,10 @@
     color: var(--on-primary-color) !important;
 }
 
+.navbar-brand span{
+    color:var(--secondary-color);
+}
+
 .navbar-nav{
     display: flex;
     justify-content: space-between;
