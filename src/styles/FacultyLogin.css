@@ -22,17 +22,6 @@
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    text-align: center;
-}
-.studlogin .row h1 .logo{
-    text-decoration: none;
-}
-.studlogin .row h1 .logo:hover{
-    color: inherit;
-}
-
-.studlogin .row h1 span{
-    color: var(--secondary-color);
 }
 
  .msg{

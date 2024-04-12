@@ -1,0 +1,44 @@
+p{
+    font-size: 1em;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+p a{
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+p a:hover{
+    color: #000000;
+    text-decoration: underline;
+}
+
+
+a{
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+a:hover{
+    color: #000000;
+    text-decoration: underline;
+}
+
+/* mediaquires */
+
+@media screen and (max-width: 768px){
+    .studsignup .row{
+        min-width: 100%;
+    }
+
+    .msg{
+        width: 100%;
+    }
+}

@@ -3,10 +3,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
-import "../styles/StudLogin.css";
+// import "../styles/StudLogin.css";
+import "../styles/FacultyLogin.css";
 import { Button } from "react-bootstrap";
 
-const StudLogin = () => {
+const FacultyLogin = () => {
   return (
     <Container className="studlogin">
       <Row>
@@ -17,7 +18,7 @@ const StudLogin = () => {
         </h1>
       </Row>
       <Row>
-        <h1 className="text-center">Student Login</h1>
+        <h1 className="text-center">Faculty Login</h1>
       </Row>
 
       <Row>
@@ -52,7 +53,7 @@ const StudLogin = () => {
               Submit
             </Button> */}
 
-            <Link className="" to="/student-admin">
+            <Link className="" to="/faculty-admin">
               <Button className="btnLogin" variant="primary" type="submit">
                 Submit
               </Button>
@@ -63,10 +64,10 @@ const StudLogin = () => {
 
       <p className="msg">
         Don't have an account?
-        <Link to="/student-signup">Sign Up</Link>
+        <Link to="/faculty-signup">Sign Up</Link>
       </p>
     </Container>
   );
 };
 
-export default StudLogin;
+export default FacultyLogin;

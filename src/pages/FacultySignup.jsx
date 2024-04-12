@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import "../styles/StudSignUp.css";
+import "../styles/FacultySignup.css";
 
-const StudSignUp = () => {
+const FacultySignup = () => {
   return (
     <Container className="studlogin">
       <Row>
@@ -17,7 +17,7 @@ const StudSignUp = () => {
         </h1>
       </Row>
       <Row>
-        <h1 className="text-center">Student Sign Up</h1>
+        <h1 className="text-center">Faculty Sign Up</h1>
       </Row>
 
       <Row>
@@ -82,7 +82,7 @@ const StudSignUp = () => {
               Submit
             </Button> */}
             {/* button of submit that goes to route /student-admin */}
-            <Link className="" to="/student-admin">
+            <Link className="" to="/faculty-admin">
               <Button className="btnLogin" variant="primary" type="submit">
                 Submit
               </Button>
@@ -91,7 +91,7 @@ const StudSignUp = () => {
         </Col>
         <p>
           Already have an account?
-          <Link to="/student-login">Login</Link>
+          <Link to="/faculty-login">Login</Link>
         </p>
           <Link to="/forgot-password">Forgot Password</Link>
       </Row>
@@ -99,4 +99,4 @@ const StudSignUp = () => {
   );
 };
 
-export default StudSignUp;
+export default FacultySignup;

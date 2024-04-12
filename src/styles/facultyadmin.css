@@ -1,0 +1,15 @@
+@import url("./theme.css");
+
+.facultyAdmin{
+    width: 100%;
+    min-height: 100vh;
+    /* background: #000; */
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+}
+
+.facultyAdmin .comming_soon{
+    font-size: 3rem;
+}

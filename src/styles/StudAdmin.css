@@ -1,0 +1,15 @@
+@import url("./theme.css");
+
+.admin{
+    width: 100%;
+    min-height: 100vh;
+    /* background: #000; */
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+}
+
+.admin .comming_soon{
+    font-size: 3rem;
+}

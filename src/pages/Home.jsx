@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 const Home = () => {
   return (
     <>
-    <Header/>
+    <Header path="#home"  />
     <Container id="home" className="home">
 
       <Row>
