@@ -7,11 +7,7 @@ const StudAdmin = () => {
     // <Container className='studadmin'>
       <div className="admin">
         <StudHeader/>
-        <div className="comming_soon">
-            <h1>
-                Page will Coming Soon
-            </h1>
-        </div>
+        
       </div>
   )
 }

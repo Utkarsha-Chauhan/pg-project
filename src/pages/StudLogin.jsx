@@ -1,71 +1,127 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-import "../styles/StudLogin.css";
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase"; 
+import "../styles/StudLogin.css";
+
 
 const StudLogin = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    setErrors({
+      ...errors,
+      [name]: ""
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = validateForm(formData);
+    if (Object.keys(newErrors).length === 0) {
+      signInWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("User signed in:", user);
+          navigate("/student-admin"); // Redirect to student admin page
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          console.error("Error signing in:", errorMessage);
+          alert(errorMessage); // Show error message in an alert
+        });
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  const validateForm = (data) => {
+    let errors = {};
+
+    if (!data.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+      errors.email = "Email is invalid";
+    }
+
+    if (!data.password.trim()) {
+      errors.password = "Password is required";
+    }
+
+    return errors;
+  };
+
   return (
-    <Container className="studlogin">
-      <Row>
-        <h1>
-          <Link to={"/"} className="logo">
-            PG- <span>Pedia</span>
-          </Link>
-        </h1>
-      </Row>
-      <Row>
-        <h1 className="text-center">Student Login</h1>
-      </Row>
+    <div className="studlogin">
+      <h1>
+        <Link to={"/"} className="logo">
+          PG<span>-Pedia</span>
+        </Link>
+      </h1>
 
-      <Row>
-        <Col className="col1">
-          <form>
-            <div class="mb-3">
-              <label for="studentid" class="form-label">
-                Email
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="studentid"
-                name="studentid"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                required
-              />
-            </div>
+      <h1 className="text-center">Student Login</h1>
 
-            {/* <Button className="btnLogin">
-              Submit
-            </Button> */}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="text"
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className={`form-control ${
+              errors.password ? "is-invalid" : ""
+            }`}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
+        </div>
 
-            <Link className="" to="/student-admin">
-              <Button className="btnLogin" variant="primary" type="submit">
-                Submit
-              </Button>
-            </Link>
-          </form>
-        </Col>
-      </Row>
+        <Button className="btnLogin" variant="primary" type="submit">
+          Submit
+        </Button>
+      </form>
 
       <p className="msg">
-        Don't have an account?
-        <Link to="/student-signup">Sign Up</Link>
+        Don't have an account? <Link to="/student-signup">Sign Up</Link>
       </p>
-    </Container>
+      <p>
+        <Link to="/forgot-password">Forgot Password</Link>
+      </p>
+    </div>
   );
 };
 

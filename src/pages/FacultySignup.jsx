@@ -1,102 +1,300 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase"; // Make sure to import the auth object from your firebase.js file
 import "../styles/FacultySignup.css";
 
 const FacultySignup = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    // Clear error message when user starts typing
+    setErrors({
+      ...errors,
+      [name]: ""
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = validateForm(formData);
+    if (Object.keys(newErrors).length === 0) {
+      createUserWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+          // User signed up successfully
+          const user = userCredential.user;
+          console.log("User signed up:", user);
+          // Redirect or perform any other action
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // Handle errors
+          console.error("Error signing up:", errorMessage);
+          setErrors({ ...errors, firebase: errorMessage });
+        });
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  const validateForm = (data) => {
+    let errors = {};
+
+    if (!data.name.trim()) {
+      errors.name = "Name is required";
+    }
+
+    if (!data.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+      errors.email = "Email is invalid";
+    }
+
+    if (!data.password.trim()) {
+      errors.password = "Password is required";
+    } else if (data.password.length < 6) {
+      errors.password = "Password must be at least 6 characters long";
+    }
+
+    if (data.password !== data.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    return errors;
+  };
+
   return (
-    <Container className="studlogin">
-      <Row>
-        <h1>
-          <Link to={"/"} className="logo">
-            PG- <span>Pedia</span>
-          </Link>
-        </h1>
-      </Row>
-      <Row>
-        <h1 className="text-center">Faculty Sign Up</h1>
-      </Row>
+    <div className="studlogin">
+      <h1>
+        <Link to={"/"} className="logo">
+          PG- <span>Pedia</span>
+        </Link>
+      </h1>
 
-      <Row>
-        <Col className="col1">
-          <form>
-            {/* name */}
-            <div class="mb-3">
-              <label for="name" class="form-label">
-                Name
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="name"
-                required
-              />
-            </div>
-            {/* email */}
-            <div class="mb-3">
-              <label for="email" class="form-label">
-                Email
-              </label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
+      <h1 className="text-center">Faculty Sign Up</h1>
 
-            {/* password */}
-            <div class="mb-3 pass">
-              <label for="password" class="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                required
-              />
-            </div>
+      <form onSubmit={handleSubmit}>
+        {/* name */}
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            className={`form-control ${errors.name ? "is-invalid" : ""}`}
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          {errors.name && (
+            <div className="invalid-feedback">{errors.name}</div>
+          )}
+        </div>
+        {/* email */}
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="email"
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
+        </div>
 
-            {/* confirm password */}
-            <div class="mb-3 pass">
-              <label for="cpassword" class="form-label">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="cpassword"
-                name="cpassword"
-                required
-              />
-            </div>
+        {/* password */}
+        <div className="mb-3 pass">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className={`form-control ${
+              errors.password ? "is-invalid" : ""
+            }`}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
+        </div>
 
-            {/* <Button variant="primary" type="submit">
-              Submit
-            </Button> */}
-            {/* button of submit that goes to route /student-admin */}
-            <Link className="" to="/faculty-admin">
-              <Button className="btnLogin" variant="primary" type="submit">
-                Submit
-              </Button>
-            </Link>
-          </form>
-        </Col>
-        <p>
-          Already have an account?
-          <Link to="/faculty-login">Login</Link>
-        </p>
-          <Link to="/forgot-password">Forgot Password</Link>
-      </Row>
-    </Container>
+        {/* confirm password */}
+        <div className="mb-3 pass">
+          <label htmlFor="confirmPassword" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            className={`form-control ${
+              errors.confirmPassword ? "is-invalid" : ""
+            }`}
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          {errors.confirmPassword && (
+            <div className="invalid-feedback">{errors.confirmPassword}</div>
+          )}
+        </div>
+
+        {errors.firebase && (
+          <div className="alert alert-danger" role="alert">
+            {errors.firebase}
+          </div>
+        )}
+
+        <Button className="btnLogin" variant="primary" type="submit">
+          Submit
+        </Button>
+      </form>
+
+      <p>
+        Already have an account? <Link to="/faculty-login">Login</Link>
+      </p>
+      <p>
+        <Link to="/forgot-password">Forgot Password</Link>
+      </p>
+    </div>
   );
 };
 
 export default FacultySignup;
+
+// import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { Button } from "react-bootstrap";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth, db } from "../firebase";
+// import { doc, setDoc } from "firebase/firestore";
+// import "../styles/FacultySignup.css";
+
+// const FacultySignUp = () => {
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     confirmPassword: ""
+//   });
+
+//   const [errors, setErrors] = useState({});
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const navigate = useNavigate();
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({
+//       ...formData,
+//       [name]: value
+//     });
+//     setErrors({
+//       ...errors,
+//       [name]: ""
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     const newErrors = validateForm(formData);
+//     if (Object.keys(newErrors).length === 0) {
+//       try {
+//         const userCredential = await createUserWithEmailAndPassword(
+//           auth,
+//           formData.email,
+//           formData.password
+//         );
+//         const user = userCredential.user;
+//         console.log("User signed up:", user);
+//         // Store user data to Firestore
+//         await addUserDataToFirestore(user.uid);
+//         navigate("/student-admin"); // Redirect to student admin page
+//       } catch (error) {
+//         const errorMessage = error.message;
+//         console.error("Error signing up:", errorMessage);
+//         alert(errorMessage); // Show error message in an alert
+//       } finally {
+//         setIsSubmitting(false);
+//       }
+//     } else {
+//       setErrors(newErrors);
+//       setIsSubmitting(false);
+//     }
+//   };
+//   const addUserDataToFirestore = async (userId) => {
+//     try {
+//         // Store user data in the "faculties" collection in Firestore
+//         await setDoc(doc(db, "faculties", userId), {
+//           name: formData.name,
+//           email: formData.email
+//         });
+//         console.log("User data added to Firestore");
+//       } catch (error) {
+//         console.error("Error adding user data to Firestore:", error);
+//         throw new Error("Error adding user data to Firestore");
+//       }
+//     };
+
+//   const validateForm = (data) => {
+//     let errors = {};
+
+//     if (!data.name.trim()) {
+//       errors.name = "Name is required";
+//     }
+
+//     if (!data.email.trim()) {
+//       errors.email = "Email is required";
+//     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+//       errors.email = "Email is invalid";
+//     }
+
+//     if (!data.password.trim()) {
+//       errors.password = "Password is required";
+//     } else if (data.password.length < 6) {
+//       errors.password = "Password must be at least 6 characters long";
+//     }
+
+//     if (data.password !== data.confirmPassword) {
+//       errors.confirmPassword = "Passwords do not match";
+//     }
+
+//     return errors;
+//   };
+
+//   return (
+//     <div className="studlogin">
+//       {/* Form content */}
+//     </div>
+//   );
+// };
+
+// export default FacultySignUp;

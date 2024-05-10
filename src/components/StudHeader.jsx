@@ -20,10 +20,13 @@ function StudHeader() {
                 DashBoard
               </Nav.Link>
               <Nav.Link  href="#">
-                Submit the PG  Project
+                Select Topic
+              </Nav.Link>
+              <Nav.Link href="#">
+                Submission
               </Nav.Link>
               <Nav.Link  href="#contact">
-                Chosse the Mentor
+                About Mentor
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

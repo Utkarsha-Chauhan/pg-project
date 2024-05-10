@@ -1,72 +1,72 @@
 @import url("./theme.css");
 
-.studlogin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-    flex-direction: column;
+.faculty-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  flex-direction: column;
 }
 
-.studlogin .row{
-    min-width: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.faculty-login form {
+  min-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.studlogin .row h1{
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.faculty-login h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
- .msg{
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    width: 400px;
-    text-align: center;
-} 
-
-
-.msg a{
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold; 
+.faculty-login h1 .logo {
+  text-decoration: none;
 }
 
-.msg a:hover{
-    color: var(--secondary-color);
-    text-decoration: underline;
-
+.faculty-login h1 .logo:hover {
+  color: inherit;
 }
 
-/* .studlogin .row {
-    border: 1px solid var(--primary-color);
-} */
-
-/* mediaquires */
-
-@media screen and (max-width: 768px){
-    .studlogin .row{
-        min-width: 100%;
-    }
+.faculty-login h1 span {
+  color: var(--secondary-color);
 }
 
-.btnLogin{
-    background-color: var(--primary-color) !important;
-    color: var(--on-primary-color) !important;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin-top: 1rem;
+.faculty-login .msg {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  width: 400px;
+  text-align: center;
 }
 
-.btnLogin:hover{
-    background-color: var(--secondary-color) !important;
-    color: var(--on-secondary-color) !important;
+.faculty-login .msg a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.faculty-login .msg a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.btnLogin {
+  background-color: var(--primary-color) !important;
+  color: var(--on-primary-color) !important;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btnLogin:hover {
+  background-color: var(--secondary-color) !important;
+  color: var(--on-secondary-color) !important;
 }
