@@ -1,15 +1,18 @@
-import React from 'react'
-import "../styles/StudAdmin.css"
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import "../styles/StudAdmin.css";
 import StudHeader from '../components/StudHeader';
 
 const StudAdmin = () => {
-  return (
-    // <Container className='studadmin'>
-      <div className="admin">
-        <StudHeader/>
-        
-      </div>
-  )
-}
+  // Access the location state
+  const location = useLocation();
+  const { email } = location.state || {}; // Destructure email from state or set it to an empty object if state is undefined
 
-export default StudAdmin
+  return (
+    <div className="admin">
+      <StudHeader userEmail={email} /> {/* Pass userEmail as a prop to StudHeader */}
+    </div>
+  );
+};
+
+export default StudAdmin;

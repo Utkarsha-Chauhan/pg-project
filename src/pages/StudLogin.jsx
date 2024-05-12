@@ -1,17 +1,17 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase"; 
+import { auth } from "../firebase";
 import "../styles/StudLogin.css";
-
 
 const StudLogin = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -20,29 +20,37 @@ const StudLogin = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
     setErrors({
       ...errors,
-      [name]: ""
+      [name]: "",
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const newErrors = validateForm(formData);
     if (Object.keys(newErrors).length === 0) {
       signInWithEmailAndPassword(auth, formData.email, formData.password)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log("User signed in:", user);
-          navigate("/student-admin"); // Redirect to student admin page
+          // Pass user credentials to /student-admin
+          navigate("/student-admin", {
+            state: { email: formData.email, password: formData.password },
+          });
         })
         .catch((error) => {
           const errorMessage = error.message;
           console.error("Error signing in:", errorMessage);
           alert(errorMessage); // Show error message in an alert
-        });
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        }
+        ); 
     } else {
       setErrors(newErrors);
     }
@@ -76,15 +84,13 @@ const StudLogin = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
           <input
             type="text"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             id="email"
             name="email"
             value={formData.email}
+            placeholder="Email"
             onChange={handleChange}
           />
           {errors.email && (
@@ -92,26 +98,22 @@ const StudLogin = () => {
           )}
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
           <input
             type="password"
-            className={`form-control ${
-              errors.password ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
           />
           {errors.password && (
             <div className="invalid-feedback">{errors.password}</div>
           )}
         </div>
 
-        <Button className="btnLogin" variant="primary" type="submit">
-          Submit
+        <Button className="btnLogin" variant="primary" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Logging in..." : "Log In"}
         </Button>
       </form>
 

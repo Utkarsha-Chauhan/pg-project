@@ -10,6 +10,7 @@ const FacultyLogin = () => {
     email: "",
     password: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -28,13 +29,16 @@ const FacultyLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const newErrors = validateForm(formData);
     if (Object.keys(newErrors).length === 0) {
       signInWithEmailAndPassword(auth, formData.email, formData.password)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log("User signed in:", user);
-          navigate("/faculty-admin"); // Redirect to faculty admin page
+          navigate("/faculty-admin",{
+            state: { email: formData.email, password: formData.password }
+          }); // Redirect to faculty admin page
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -43,7 +47,8 @@ const FacultyLogin = () => {
         });
     } else {
       setErrors(newErrors);
-    }
+    } 
+    setIsSubmitting(false);
   };
 
   const validateForm = (data) => {
@@ -74,9 +79,6 @@ const FacultyLogin = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
           <input
             type="text"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -84,15 +86,13 @@ const FacultyLogin = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Email"
           />
           {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
           )}
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
           <input
             type="password"
             className={`form-control ${
@@ -102,14 +102,19 @@ const FacultyLogin = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
           />
           {errors.password && (
             <div className="invalid-feedback">{errors.password}</div>
           )}
         </div>
 
-        <Button className="btnLogin" variant="primary" type="submit">
-          Submit
+        <Button className="btnLogin" variant="primary" type="submit"
+          disabled={isSubmitting}
+        >
+          {
+            isSubmitting ? "Logging in..." : "Login"
+          }
         </Button>
       </form>
 

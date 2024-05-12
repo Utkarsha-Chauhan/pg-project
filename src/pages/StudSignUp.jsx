@@ -1,18 +1,17 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase"; 
+import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import "../styles/StudSignUp.css"
+import "../styles/StudSignUp.css";
 
 const StudSignUp = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -23,18 +22,21 @@ const StudSignUp = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
     setErrors({
       ...errors,
-      [name]: ""
+      [name]: "",
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
+
     const newErrors = validateForm(formData);
+
     if (Object.keys(newErrors).length === 0) {
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -46,7 +48,8 @@ const StudSignUp = () => {
         console.log("User signed up:", user);
         // Store user data to Firestore
         await addUserDataToFirestore(user.uid);
-        navigate("/student-admin"); // Redirect to student admin page
+        // navigate("/student-admin"); // Redirect to student admin page
+        navigate("/student-admin", { state: { email: formData.email, password: formData.password } });
       } catch (error) {
         const errorMessage = error.message;
         console.error("Error signing up:", errorMessage);
@@ -100,21 +103,18 @@ const StudSignUp = () => {
   };
 
   return (
-    <div className="studlogin">
+    <div className="studSignup">
       <h1>
         <Link to={"/"} className="logo">
           PG- <span>Pedia</span>
         </Link>
       </h1>
 
-      <h1 className="text-center">Student Sign Up</h1>
+      <h1>Student Sign Up</h1>
 
       <form onSubmit={handleSubmit}>
         {/* name */}
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
           <input
             type="text"
             className={`form-control ${errors.name ? "is-invalid" : ""}`}
@@ -122,17 +122,13 @@ const StudSignUp = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Full Name"
             required
           />
-          {errors.name && (
-            <div className="invalid-feedback">{errors.name}</div>
-          )}
+          {errors.name && <div className="invalid-feedback">{errors.name}</div>}
         </div>
         {/* email */}
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
           <input
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -140,6 +136,7 @@ const StudSignUp = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Email"
             required
           />
           {errors.email && (
@@ -149,18 +146,14 @@ const StudSignUp = () => {
 
         {/* password */}
         <div className="mb-3 pass">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
           <input
             type="password"
-            className={`form-control ${
-              errors.password ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
             required
           />
           {errors.password && (
@@ -170,9 +163,6 @@ const StudSignUp = () => {
 
         {/* confirm password */}
         <div className="mb-3 pass">
-          <label htmlFor="confirmPassword" className="form-label">
-            Confirm Password
-          </label>
           <input
             type="password"
             className={`form-control ${
@@ -182,6 +172,7 @@ const StudSignUp = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
+            placeholder="Confirm Password"
             required
           />
           {errors.confirmPassword && (
@@ -189,7 +180,12 @@ const StudSignUp = () => {
           )}
         </div>
 
-        <Button className="btnLogin" variant="primary" type="submit" disabled={isSubmitting}>
+        <Button
+          className="btnSignup"
+          variant="primary"
+          type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? <span>Loading...</span> : <span>Submit</span>}
         </Button>
       </form>

@@ -1,9 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Nav, Navbar,  } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar,  } from 'react-bootstrap';
 import '../styles/header.css';
-
-function FacultyHeader() {
+import { signOut } from 'firebase/auth'; // Import signOut method from Firebase auth
+import { auth } from '../firebase';
+function FacultyHeader({ userEmail }) {
+  const handleLogout = async () => {
+    try {
+      // Sign out the user
+      await signOut(auth);
+      // Redirect to the login page or any other page after logout
+      window.location.href = '/student-login'; // Example: Redirect to student login page
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+      // Handle error if any
+    }
+  };
 
   return (
     <>
@@ -24,10 +36,13 @@ function FacultyHeader() {
               </Nav.Link>
             
             </Nav>
+            <Navbar.Text>User Email: {userEmail} </Navbar.Text>
+            <Button className='
+              mx-3 
+              bg-danger
+              fw-bold
+            ' onClick={handleLogout}>Logout</Button> {/* Logout button */}
           </Navbar.Collapse>
-          {/* <Navbar.Collapse className="me-auto navbar-nav justify-content-end">
-            <Button className='loginBtn' onClick={handleShow}>Registration/Login</Button>
-          </Navbar.Collapse> */}
         </Container>
       </Navbar>
 

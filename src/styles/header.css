@@ -118,3 +118,13 @@
     padding-left: 10px;
 
 }
+
+.navbar-text{
+    color: var(--on-primary-color) !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.navbar-collapse{
+    text-align: center;
+}

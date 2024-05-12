@@ -1,18 +1,13 @@
 @import url("./theme.css");
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
 .home{
-    /* background-color: red; */
-    color: var(--text-color);
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    padding: 10px;
-    text-align: center;
-    min-height: 90vh;
-    margin: 10px auto;
-    /* display: flex; */
-    /* flex-direction: column; */
-    justify-content: center;
-    /* width: 100vw !important; */
+    
 }
 
 .home .row{
