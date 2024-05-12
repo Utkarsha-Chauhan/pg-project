@@ -5,7 +5,7 @@ import { signOut } from 'firebase/auth'; // Import signOut method from Firebase 
 import '../styles/header.css';
 import { auth } from '../firebase';
 
-function StudHeader({ userEmail }) {
+function StudHeader({ email }) {
   const handleLogout = async () => {
     try {
       // Sign out the user
@@ -20,7 +20,7 @@ function StudHeader({ userEmail }) {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-body-tertiary student-header">
         <Container >
           <Navbar.Brand as={Link} to="/student-admin">
             PG<span>-Pedia</span>
@@ -41,7 +41,7 @@ function StudHeader({ userEmail }) {
                 About Mentor
               </Nav.Link>
             </Nav>
-            <Navbar.Text>User Email: {userEmail}</Navbar.Text> {/* Display user email */}
+            <Navbar.Text>User Email: {email}</Navbar.Text> {/* Display user email */}
             <Button className='
               mx-3 
               bg-danger

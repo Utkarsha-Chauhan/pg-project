@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
 import "../styles/StudSignUp.css";
+import { signUpStudent } from "../services/authService";
 
 const StudSignUp = () => {
   const [formData, setFormData] = useState({
@@ -39,17 +37,16 @@ const StudSignUp = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        const user = userCredential.user;
-        console.log("User signed up:", user);
-        // Store user data to Firestore
-        await addUserDataToFirestore(user.uid);
-        // navigate("/student-admin"); // Redirect to student admin page
-        navigate("/student-admin", { state: { email: formData.email, password: formData.password } });
+        // Call signUpStudent function from authService
+        await signUpStudent(formData.email, formData.password, formData.name);
+        // If signup is successful, navigate to student admin page
+        navigate("/student-admin", {
+          state: {
+            email: formData.email,
+            password: formData.password,
+            name: formData.name,
+          },
+        });
       } catch (error) {
         const errorMessage = error.message;
         console.error("Error signing up:", errorMessage);
@@ -63,18 +60,9 @@ const StudSignUp = () => {
     }
   };
 
-  const addUserDataToFirestore = async (userId) => {
-    try {
-      await setDoc(doc(db, "students", userId), {
-        name: formData.name,
-        email: formData.email,
-      });
-      console.log("User data added to Firestore");
-    } catch (error) {
-      console.error("Error adding user data to Firestore:", error);
-      throw new Error("Error adding user data to Firestore");
-    }
-  };
+  
+
+ 
 
   const validateForm = (data) => {
     let errors = {};

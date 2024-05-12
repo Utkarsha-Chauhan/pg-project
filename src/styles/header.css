@@ -18,6 +18,24 @@
     border-bottom-right-radius: 20px ;
     border-bottom-left-radius: 20px ; 
 }
+.student-header{
+    background-color: var(--primary-color) !important;
+    color: var(--on-primary-color) !important;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    position: static;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--on-primary-color);
+    border-bottom-right-radius: 20px ;
+    border-bottom-left-radius: 20px ; 
+}
 
 .navbar-brand{
     font-size: 1.5rem;

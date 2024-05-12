@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase"; // Make sure to import the auth object from your firebase.js file
+import { auth, db } from "../firebase"; // Make sure to import the auth object from your firebase.js file
 import "../styles/FacultySignup.css";
+import { doc, setDoc } from "firebase/firestore";
 
 const FacultySignup = () => {
   const [formData, setFormData] = useState({
@@ -46,6 +47,9 @@ const FacultySignup = () => {
         );
         const user = userCredential.user;
         console.log("User signed up:", user);
+        // Store user data to Firestore
+        await addUserDataToFirestore(user.uid);
+        // Redirect to faculty admin page
         navigate("/faculty-admin", { state: { email: formData.email, password: formData.password } });
       } catch (error) {
         const errorMessage = error.message;
@@ -59,6 +63,20 @@ const FacultySignup = () => {
       setIsSubmitting(false);
     }
   };
+
+  const addUserDataToFirestore = async (userId) => {
+    try {
+      await setDoc(doc(db, "faculties", userId), {
+        name: formData.name,
+        email: formData.email,
+      });
+      console.log("User data added to Firestore");
+    } catch (error) {
+      console.error("Error adding user data to Firestore:", error);
+      throw new Error("Error adding user data to Firestore");
+    }
+  };
+
 
   const validateForm = (data) => {
     let errors = {};

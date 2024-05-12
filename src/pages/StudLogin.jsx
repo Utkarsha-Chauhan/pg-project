@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import {loginStudent} from '../services/authService'
 import "../styles/StudLogin.css";
 
 const StudLogin = () => {
@@ -28,29 +27,25 @@ const StudLogin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     const newErrors = validateForm(formData);
     if (Object.keys(newErrors).length === 0) {
-      signInWithEmailAndPassword(auth, formData.email, formData.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("User signed in:", user);
-          // Pass user credentials to /student-admin
-          navigate("/student-admin", {
-            state: { email: formData.email, password: formData.password },
-          });
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          console.error("Error signing in:", errorMessage);
-          alert(errorMessage); // Show error message in an alert
-        })
-        .finally(() => {
-          setIsSubmitting(false);
-        }
-        ); 
+      try {
+        // Call signInStudent function from authService
+        await loginStudent(formData.email, formData.password);
+        // If sign-in is successful, navigate to student admin page
+        navigate("/student-admin", {
+          state: { email: formData.email, password: formData.password },
+        });
+      } catch (error) {
+        const errorMessage = error.message;
+        console.error("Error signing in:", errorMessage);
+        alert(errorMessage); // Show error message in an alert
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
       setErrors(newErrors);
     }
