@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import '../styles/header.css';
 
+let userType = "";
+
 function Header() {
   const [show, setShow] = useState(false);
 
@@ -42,7 +44,7 @@ function Header() {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Link to="/student-login">Student Login</Link>
+          <Link to="/student-login" >Student Login</Link>
           <Link to="/faculty-login">Faculty Login</Link>
         </Modal.Body>
       </Modal>

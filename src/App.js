@@ -1,4 +1,4 @@
-
+import './app.css'
 
 
 import React, { useEffect, useState } from 'react';
@@ -34,59 +34,17 @@ const App = () => {
   }, []);
   return (
     <Router>
-      {/* Wrap routes with ErrorBoundary for error handling (optional) */}
-      {/* <ErrorBoundary> */}
-        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/student-login" element={<StudentLogin />} />
             <Route path="/faculty-login" element={<FacultyLogin />} />
             <Route path="/student-signup" element={<StudentSignUp db={db} />} />
             <Route path="/faculty-signup" element={<FacultySignup db={db} />} />
+            <Route path="/student-admin" element={<StudentAdmin user={user} />} />
+            <Route path="/faculty-admin" element={<FacultyAdmin user={user} />} />
 
-            {/* Protected Routes (implement logic to check authentication and roles) */}
-            {/* <Route path="/student-admin" element={<StudentAdmin db={db} />} />
-            <Route path="/faculty-admin" element={<FacultyAdmin db={db} />} /> */}
-            {
-              // Add protected routes here
-              user 
-              ? (
-                <>
-                  <Route path="/student-admin" element={<StudentAdmin db={db} />} />
-                  <Route path="/faculty-admin" element={<FacultyAdmin db={db} />} />
-                </>
-              )
-              : (
-                <Route path="*" element={<div
-                  style={{
-                    padding: '20px',
-                    width :"100%",
-                    height:"100vh",
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-
-                  }}
-                >
-                  <h1 
-                    style={{
-                      color: 'red',
-                      textAlign: 'center'
-                    }}
-                  >Protected Routes</h1>
-                  <p
-                    style={{
-                      textAlign: 'center'
-                    }}
-                  >You need to be logged in to access these routes</p>
-                </div>
-                } />
-              )
-            }
           </Routes>
         
-        </div>
       {/* </ErrorBoundary> */}
     </Router>
   );

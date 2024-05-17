@@ -1,11 +1,12 @@
 :root {
     /* Primary color */
-    --primary-color: #5555FF;
-    --on-primary-color: #FFFFFF; /* Text color on primary background */
+    --primary-color: #04284e;
+    --on-primary-color: white; /* Text color on primary background */
   
     /* Secondary color */
-    --secondary-color: #FF7F50; /* Coral (orange) as a contrasting secondary color */
-    --on-secondary-color: #FFFFFF; /* Text color on secondary background */
+    --secondary-color: orange; /* Coral (orange) as a contrasting secondary color */
+    --on-secondary-color: 
+    #000000; /* Text color on secondary background */
   
     /* Tertiary color */
     --tertiary-color: #32CD32; /* Lime green as a vibrant tertiary color */

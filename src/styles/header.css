@@ -2,7 +2,7 @@
 
 .navbar{
     background-color: var(--primary-color) !important;
-    color: var(--on-primary-color) !important;
+    color: var(--primary-color) !important;
     padding: 1rem 0;
     display: flex;
     justify-content: space-between;
@@ -14,9 +14,10 @@
     top: 0;
     left: 0;
     right: 0;
-    border-bottom: 1px solid var(--on-primary-color);
+    /* border-bottom: 1px solid var(--on-primary-color); */
     border-bottom-right-radius: 20px ;
     border-bottom-left-radius: 20px ; 
+    backdrop-filter: blur(10px);
 }
 .student-header{
     background-color: var(--primary-color) !important;

@@ -9,77 +9,18 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    // Clear error message when user starts typing
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateForm(formData);
-    if (Object.keys(newErrors).length === 0) {
-      // Form submission logic here
-      console.log("Form submitted successfully!");
-      // Redirect or perform any other action after successful form submission
-    } else {
-      setErrors(newErrors);
-    }
-  };
-
-  const validateForm = (data) => {
-    let errors = {};
-
-    if (!data.name.trim()) {
-      errors.name = "Name is required";
-    }
-
-    if (!data.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-      errors.email = "Email is invalid";
-    }
-
-    if (!data.subject.trim()) {
-      errors.subject = "Subject is required";
-    }
-
-    if (!data.message.trim()) {
-      errors.message = "Message is required";
-    }
-
-    return errors;
-  };
-
+  
   return (
     <>
       <Header />
-      <Container id="home" className="home">
+      <div id="home" className="home">
         <Row>
           <Col className="col1">
             <h1>
               PG-<span>Pedia</span>
             </h1>
             <p>
-              A Portal that manages the PG dissertation of students and
-              teachers. It provides a platform for students to submit their
-              thesis and for teachers to evaluate them.
+            Our portal streamlines PG dissertation management, enabling students to upload theses, track deadlines, and receive feedback. Teachers can efficiently evaluate submissions, provide detailed feedback, and assign grades. Key features include plagiarism detection and communication tools, ensuring effective supervision and maintaining academic integrity across the institution.
             </p>
             <Button
               variant="primary"
@@ -99,7 +40,7 @@ const Home = () => {
             <img src={home_img} alt="home" />
           </Col>
         </Row>
-      </Container>
+      </div>
 
       <Container id="about" className="about">
         <Row className="row1">
@@ -141,68 +82,7 @@ const Home = () => {
         </Row>
       </Container>
 
-      {/* contact us form */}
-      <Container id="contact" className="contact">
-        <Row className="row1">
-          <Col>
-            <h1>Contact Us</h1>
-          </Col>
-        </Row>
-        <Row className="row2">
-          <Col>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`form-control ${errors.name ? "is-invalid" : ""}`}
-              />
-              {errors.name && (
-                <div className="invalid-feedback">{errors.name}</div>
-              )}
-
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`form-control ${errors.email ? "is-invalid" : ""}`}
-              />
-              {errors.email && (
-                <div className="invalid-feedback">{errors.email}</div>
-              )}
-
-              <input
-                type="text"
-                placeholder="Subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className={`form-control ${errors.subject ? "is-invalid" : ""}`}
-              />
-              {errors.subject && (
-                <div className="invalid-feedback">{errors.subject}</div>
-              )}
-
-              <textarea
-                placeholder="Message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className={`form-control ${errors.message ? "is-invalid" : ""}`}
-              />
-              {errors.message && (
-                <div className="invalid-feedback">{errors.message}</div>
-              )}
-
-              <Button type="submit">Send</Button>
-            </form>
-          </Col>
-        </Row>
-      </Container>
+      
       <Footer />
     </>
   );

@@ -20,9 +20,10 @@ function StudHeader({ email }) {
 
   return (
     <>
+    
       <Navbar expand="lg" className="bg-body-tertiary student-header">
         <Container >
-          <Navbar.Brand as={Link} to="/student-admin">
+          <Navbar.Brand as={Link} to="/">
             PG<span>-Pedia</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,12 +42,8 @@ function StudHeader({ email }) {
                 About Mentor
               </Nav.Link>
             </Nav>
-            <Navbar.Text>User Email: {email}</Navbar.Text> {/* Display user email */}
-            <Button className='
-              mx-3 
-              bg-danger
-              fw-bold
-            ' onClick={handleLogout}>Logout</Button> {/* Logout button */}
+             {/* Display user email */}
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
